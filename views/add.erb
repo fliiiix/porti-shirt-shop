@@ -1,0 +1,13 @@
+<style type="text/css">
+	form {width: 350px; margin: auto;}
+	form label {float: left; margin-right: 15px;}
+	#submit {float: right; margin-top: 15px;}
+</style>
+<div><%= @meldung %></div>
+<form action="/add" method="post" enctype="multipart/form-data">
+	<h1>Add Shirt</h1>
+	<label>Shirt Name:&nbsp;</label><input type="text" name="name"><br>
+	<label>Shirt Preis:&nbsp;&nbsp;</label><input type="text" name="preis"><br>
+	<input name="file" type="file"><br>
+	<input type="text" name="key" style="margin-top: 15px;"> <input type="submit" value="Speichern" id="submit" class="btn btn-primary">
+</form>
