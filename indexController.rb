@@ -6,7 +6,7 @@ require_relative "model.rb"
 configure do
   	MongoMapper.connection = Mongo::Connection.new('localhost', 20799)
   	MongoMapper.database = 'portiShop'
-  	pass = ENV['mongoPass']
+  	pass = ENV['mongoPassPortiDB']
 	MongoMapper.database.authenticate("porti", pass)
 	#False is the recomendet vaulte for production
 	set :show_exceptions, true
