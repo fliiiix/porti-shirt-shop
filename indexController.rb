@@ -1,6 +1,5 @@
 require "sinatra"
 require "fileutils"
-require "pstore"
 require_relative "model.rb"
 
 configure :development do
@@ -25,18 +24,8 @@ get "/add" do
 end
 
 post "/add" do
-	store = PStore.new("store.pstore")
-	store.transaction(true) do 
-		@key = store["key"]
-	end
-	if @key != nil
-		if @key != params[:key]
-			throw(:halt, [401, "Not authorized\n"])
-		end
-	else
-		store.transaction do
-			store["key"] = params[:key]
-		end
+	if ENV['mongoPassPortiDB'] != nil && ENV['mongoPassPortiDB'] != params[:key]
+		throw(:halt, [401, "Not authorized\n"])
 	end
 	begin
 		tempfile = params[:file][:tempfile] 
