@@ -30,8 +30,7 @@ post "/add" do
 	begin
 		tempfile = params[:file][:tempfile] 
 	    filename = rand(36**8).to_s(36) + params[:file][:filename] 
-	    FileUtils.cp(tempfile.path, "/home/fliiix/webRuby/porti-shirt-shop/public/uploads
-" + filename)
+	    FileUtils.cp(tempfile.path, "./public/uploads/" + filename)
 	rescue Exception => e
 		if params[:file] == nil
 			@meldung = "File: No file Selected"
