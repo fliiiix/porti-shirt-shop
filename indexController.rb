@@ -42,13 +42,13 @@ end
 get "/freischalten/:status/:id" do
 	shirt = Shirt.find(params[:id])
 	if shirt != nil
-		if params[:status] == true
+		if params[:status] == "true"
 			shirt.status = 1
 		end
-		if params[:status] == false
+		if params[:status] == "false"
 			shirt.status = -1
 		end
-		shirt.save
+		shirt.save!
 	end
 	redirect to('/freischalten')
 end
