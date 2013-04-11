@@ -31,11 +31,11 @@ post "/freischalten" do
 end
 
 get "/freischalten" do
-	if session["login"].inspect != true
+	if session["login"] != true
 		halt erb :login
 	end
 	@shirts = Shirt.where(:status => nil)
-	@login = session["login"].inspect
+	@login = session["login"]
 	erb :index
 end
 
