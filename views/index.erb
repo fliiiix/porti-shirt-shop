@@ -19,8 +19,8 @@
 		</div>
 		<% if @login %>
 			<div>
-				<a href="/freischalten/true/" + <%= shirt.id %> class="btn btn-success">OK</a>
-				<a href="/freischalten/false/" + <%= shirt.id %> class="btn btn-danger">Ignore</a>
+				<a href="/freischalten/true/" + <%= shirt._id %> class="btn btn-success">OK</a>
+				<a href="/freischalten/false/" + <%= shirt._id %> class="btn btn-danger">Ignore</a>
 			</div>
 		<% end %>
  </div>
