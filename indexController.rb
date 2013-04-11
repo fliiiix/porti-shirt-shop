@@ -13,7 +13,6 @@ configure :production do
 	MongoMapper.database = 'portiShop'
 	pass = ENV['mongoPassPortiDB']
 	MongoMapper.database.authenticate("porti", pass)
-	enable :sessions
 end
 
 get "/" do
@@ -26,13 +25,13 @@ post "/freischalten" do
 		halt erb :login
 	end
 	if ENV['mongoPassPortiDB'] == params[:key]
-		session["login"] = "true"
+		session["login"] = true
 	end
 	redirect to('/freischalten')
 end
 
 get "/freischalten" do
-	if session["login"].inspect != "true"
+	if session["login"].inspect != true
 		halt erb :login
 	end
 	@shirts = Shirt.where(:status => nil)
@@ -43,10 +42,10 @@ end
 get "/freischalten/:status/:id" do
 	shirt = Shirt.find(params[:id])
 	if shirt != nil
-		if params[:status] == "true"
+		if params[:status] == true
 			shirt.status = 1
 		end
-		if params[:status] == "false"
+		if params[:status] == false
 			shirt.status = -1
 		end
 		shirt.save
