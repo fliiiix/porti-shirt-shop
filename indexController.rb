@@ -26,13 +26,13 @@ post "/freischalten" do
 		halt erb :login
 	end
 	if ENV['mongoPassPortiDB'] == params[:key]
-		session["login"] = true
+		session["login"] = "true"
 	end
 	redirect to('/freischalten')
 end
 
 get "/freischalten" do
-	if session["login"].inspect != true
+	if session["login"].inspect != "true"
 		halt erb :login
 	end
 	@shirts = Shirt.where(:status => nil)
