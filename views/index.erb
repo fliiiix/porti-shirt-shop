@@ -17,5 +17,11 @@
 		<div class="preis">
 			<b>This item can be purchased <span class="preisrechts"><%= shirt.preis %>$</span></b>
 		</div>
+		<% if @login %>
+			<div>
+				<a href="/freischalten/true/" + <%= shirt.id %> class="btn btn-success">OK</a>
+				<a href="/freischalten/false/" + <%= shirt.id %> class="btn btn-danger">Ignore</a>
+			</div>
+		<% end %>
  </div>
  <% end %>
