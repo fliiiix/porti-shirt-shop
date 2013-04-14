@@ -6,13 +6,15 @@ require_relative "model.rb"
 configure :development do
 	MongoMapper.database = 'portiShop'
 	enable :show_exceptions
+	Debug = true
 end
 
 configure :production do
 	MongoMapper.connection = Mongo::Connection.new('localhost', 20799)
 	MongoMapper.database = 'portiShop'
-	pass = ENV['mongoPassPortiDB']
-	MongoMapper.database.authenticate("porti", pass)
+	Pass = ENV['mongoPassPortiDB']
+	MongoMapper.database.authenticate("porti", Pass)
+	Debug = false
 end
 
 get "/" do
@@ -21,21 +23,24 @@ get "/" do
 end
 
 post "/freischalten" do
-	if ENV['mongoPassPortiDB'] != nil && ENV['mongoPassPortiDB'] != params[:key]
+	if (Pass != nil && Pass != params[:key])
 		halt erb :login
 	end
-	if ENV['mongoPassPortiDB'] == params[:key]
+	if Pass == params[:key]
 		session["login"] = true
 	end
 	redirect to('/freischalten')
 end
 
 get "/freischalten" do
-	if session["login"] != true
+	puts "session " + (session["login"] != true).to_s
+	puts "Debug " + Debug.to_s
+	puts "endstatus " + (session["login"] != true || Debug).to_s
+	if session["login"] != true && !Debug
 		halt erb :login
 	end
 	@shirts = Shirt.where(:status => nil)
-	@login = session["login"]
+	@login = true
 	erb :index
 end
 
