@@ -22,6 +22,10 @@ get "/" do
 	erb :index
 end
 
+get "/about" do
+	erb :about
+end
+
 post "/freischalten" do
 	if (Pass != nil && Pass != params[:key])
 		halt erb :login
